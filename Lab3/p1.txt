@@ -1,0 +1,9 @@
+int a = 12121;
+int reversed = 0;
+while (a > 0) {
+	reversed = reversed * 10 + a % 10;
+}
+if (reversed == a) {
+	return true;
+}
+return false;

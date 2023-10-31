@@ -148,6 +148,10 @@ int AddTable(HashTable* table, const void* element, const void* identifier)
 
 size_t FindTable(const HashTable* table, const void* identifier)
 {
+	if (table->capacity == 0) {
+		return -1;
+	}
+
 	size_t key = table->hash_function(identifier);
 
 	// calculating the index for the array with the hash function
@@ -297,10 +301,12 @@ void GrowTableToCapacity(HashTable* table, size_t capacity)
 	table->max_search_length = 0;
 	table->size = 0;
 
-	// Now for each element, rehash it and insert it into the table
-	for (size_t index = 0; index < old_extended_capacity; index++) {
-		if (old_metadata[index] != 0) {
-			AddTable(table, OffsetPointer(old_elements, index * table->element_size), OffsetPointer(old_identifiers, index * table->identifier_size));
+	if (old_metadata != NULL) {
+		// Now for each element, rehash it and insert it into the table
+		for (size_t index = 0; index < old_extended_capacity; index++) {
+			if (old_metadata[index] != 0) {
+				AddTable(table, OffsetPointer(old_elements, index * table->element_size), OffsetPointer(old_identifiers, index * table->identifier_size));
+			}
 		}
 	}
 }

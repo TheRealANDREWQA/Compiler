@@ -1,27 +1,6 @@
 #pragma once
 #include "HashTable.h"
-#include <stdbool.h>
-
-typedef enum {
-	Identifier,
-	IntConstant,
-	BoolConstant,
-	FloatConstant,
-	StringConstant
-} SymbolType;
-
-typedef union {
-	const char* identifier_string;
-	size_t integer_constant;
-	bool bool_constant;
-	float float_constant;
-	const char* string_constant;
-} SymbolTableValue;
-
-typedef struct {
-	SymbolTableValue value;
-	SymbolType type;
-} SymbolTableEntry;
+#include "StringUtilities.h"
 
 typedef struct {
 	HashTable storage;
@@ -29,12 +8,14 @@ typedef struct {
 
 SymbolTable CreateSymbolTable(size_t initial_capacity);
 
-size_t AddSymbolTableEntry(SymbolTable* table, SymbolTableEntry entry);
+// If the token already exists, returns its index, else it adds it and generates a new entry index
+size_t AddOrGetSymbolTableEntry(SymbolTable* table, string token);
 
-SymbolTableEntry FindSymbolTableEntry(const SymbolTable* table, size_t entry_index);
+// Retrieve the entry index for that token
+size_t GetSymbolTableEntry(const SymbolTable* table, string token);
 
-size_t GetSymbolTableIndex(const SymbolTable* table, SymbolTableEntry entry);
-
-void RemoveSymbolTableEntry(SymbolTable* table, size_t entry_index);
+void RemoveSymbolTableEntry(SymbolTable* table, string token);
 
 void DeleteSymbolTable(SymbolTable* table);
+
+bool WriteSymbolTableToFile(const SymbolTable* table, const char* path);

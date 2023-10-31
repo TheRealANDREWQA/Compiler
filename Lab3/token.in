@@ -1,0 +1,3 @@
+- operators: := == != <= >= = < > + - * / %
+- separators: [ ] { } ( ) : ;
+- reserved words: array main if while bool int float string else scan print true false return
