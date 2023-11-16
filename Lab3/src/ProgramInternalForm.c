@@ -36,19 +36,20 @@ bool ReadTokenFile(ProgramInternalForm* pif, const char* path) {
 	string third_line_parse_region = FindCharacter(third_line, ':');
 	third_line_parse_region = StringAdvance(third_line_parse_region, 1);
 	ParseTokensFromWhitespace(third_line_parse_region, &pif->reserved_words);
+	free(token_file.characters);
 	return true;
 }
 
 size_t FindReservedWord(const ProgramInternalForm* pif, string token) {
-	return FindString(pif->reserved_words, token);
+	return FindStringInStream(pif->reserved_words, token);
 }
 
 size_t FindOperator(const ProgramInternalForm* pif, string token) {
-	return FindString(pif->operators, token);
+	return FindStringInStream(pif->operators, token);
 }
 
 size_t FindSeparator(const ProgramInternalForm* pif, string token) {
-	return FindString(pif->separators, token);
+	return FindStringInStream(pif->separators, token);
 }
 
 void DestroyPIF(ProgramInternalForm* pif) {

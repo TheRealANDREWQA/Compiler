@@ -30,9 +30,14 @@ typedef size_t (*HashTableGrowFunction)(size_t capacity);
 typedef int (*HashTableIterate)(void* element, void* identifier, void* extra_data);
 
 /*
-	Default hash table compare function for integers
+	Default hash table compare function for integers (unsigned int)
 */
 int HashTableCompareIntegers(const void* first, const void* second);
+
+/*
+	Default hash table compare function for integers (size_t)
+*/
+int HashTableCompareSizeT(const void* first, const void* second);
 
 /*
 	Default hash table map power of two function
@@ -43,6 +48,11 @@ size_t HashTableMapPowerOfTwo(size_t index, size_t capacity);
 	Default fallthrough hash function for integers (unsigned ints). It returns the same value.
 */
 size_t HashTableHashInteger(const void* identifier);
+
+/*
+	Default fallthrough hash function for size_t. It returns the same value.
+*/
+size_t HashTableHashSizeT(const void* identifier);
 
 /*
 	Default hash table grow function which returns the current capacity (assumed to be a power of two) multiplied by 2

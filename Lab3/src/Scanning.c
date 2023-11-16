@@ -45,22 +45,29 @@ string ScanSourceFile(ProgramInternalForm* pif, SymbolTable* symbol_table, const
 			}
 
 			if (token.entry_index == -1) {
-				if (!IsTokenValid(*current_token)) {
-					char temp_memory[256];
-					temp_memory[0] = '\0';
-					sprintf(temp_memory, "Invalid token %s on line %zu", current_token->characters, index + 1);
-					return StringMallocCopyFromPointer(temp_memory);
-				}
-
-				bool is_int_constant = IsIntConstant(*current_token);
-				if (is_int_constant) {
-					token.token_class = TOKEN_INT_CONSTANT;
+				// Check if it is a string constant first since it has special \" characters
+				bool is_string_constant = IsStringConstant(*current_token);
+				if (is_string_constant) {
+					token.token_class = TOKEN_STRING_CONSTANT;
 					token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);
 				}
 				else {
-					bool is_string_constant = IsStringConstant(*current_token);
-					if (is_string_constant) {
-						token.token_class = TOKEN_STRING_CONSTANT;
+					if (!IsTokenValid(*current_token)) {
+						char null_terminated_token[256];
+						memcpy(null_terminated_token, current_token->characters, sizeof(char) * current_token->size);
+						null_terminated_token[current_token->size] = '\0';
+						
+						char temp_memory[256];
+						temp_memory[0] = '\0';
+						sprintf(temp_memory, "Invalid token %s on line %zu", null_terminated_token, index + 1);
+
+						free(source_file_content.characters);
+						return StringMallocCopyFromPointer(temp_memory);
+					}
+
+					bool is_int_constant = IsIntConstant(*current_token);
+					if (is_int_constant) {
+						token.token_class = TOKEN_INT_CONSTANT;
 						token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);
 					}
 					else {
@@ -82,9 +89,14 @@ string ScanSourceFile(ProgramInternalForm* pif, SymbolTable* symbol_table, const
 									token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);
 								}
 								else {
+									char null_terminated_token[256];
+									memcpy(null_terminated_token, current_token->characters, sizeof(char) * current_token->size);
+									null_terminated_token[current_token->size] = '\0';
+
 									char temp_memory[256];
 									temp_memory[0] = '\0';
-									sprintf(temp_memory, "Invalid identifier %s on line %zu", current_token->characters, index + 1);
+									sprintf(temp_memory, "Invalid identifier %s on line %zu", null_terminated_token, index + 1);
+									free(source_file_content.characters);
 									return StringMallocCopyFromPointer(temp_memory);
 								}
 							}
@@ -101,6 +113,6 @@ string ScanSourceFile(ProgramInternalForm* pif, SymbolTable* symbol_table, const
 
 	DeallocateStrings(lines);
 	FreeStream(lines);
-
+	free(source_file_content.characters);
 	return InvalidString();
 }

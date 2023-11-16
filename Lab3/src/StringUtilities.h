@@ -16,6 +16,8 @@ string ReadFile(const char* path);
 
 string FindCharacter(string characters, char character);
 
+string FindString(string characters, string _string);
+
 string StringUntil(string characters, char character);
 
 string StringAfter(string original_string, string subrange);
@@ -29,10 +31,16 @@ string StringMallocCopyFromPointer(const char* characters);
 string InvalidString();
 
 // Returns the index in the stream if it finds it, else -1 if it doesn't exist
-size_t FindString(ResizableStream strings, string _string);
+size_t FindStringInStream(ResizableStream strings, string _string);
 
 // Deallocates all elements, but not the stream itself
 void DeallocateStrings(ResizableStream strings);
+
+string StringRemoveLeadingChar(string _string, char character);
+
+string StringRemoveEndingChar(string _string, char character);
+
+string StringRemoveLeadingAndEndingChar(string _string, char leading_character, char ending_character);
 
 bool StringEqual(string a, string b);
 
@@ -54,4 +62,20 @@ void ParseTokensFromWhitespace(string parse_range, ResizableStream* tokens);
 // Fills in all the positions of all occurences of the token
 void FindAllOccurences(string parse_range, string token, ResizableStream* tokens);
 
-void ParseTokensWithSeparators(string parse_range, ResizableStream separators, ResizableStream operators, ResizableStream* tokens, bool skip_whitespace);
+void ParseTokensWithSeparators(
+	string parse_range, 
+	ResizableStream separators, 
+	ResizableStream operators, 
+	ResizableStream* tokens, 
+	bool skip_whitespace
+);
+
+// Tokens must have as element type string
+void ParseTokensByCharacter(string parse_range, char character, ResizableStream* tokens);
+
+// strings must have as element type string
+bool ParseStringsFromFormat(string parse_range, string format_string, ResizableStream* strings);
+
+string ParseStringInBetween(string characters, char start_character, char end_character);
+
+bool StringStartsWith(string characters, string substring);

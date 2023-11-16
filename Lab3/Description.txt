@@ -1,0 +1,6 @@
+The parser reads the list of separators, reserved words and operators from a line named, token.in. 
+It reads these into arrays and then when parses it will reference them.
+The source file is firstly separated by lines in order to help the user in case there is an error.
+After that, the scanning is done sort of character by character, with a special case. In case we detect
+the start of a string, we parsed everything until the end of the string as a single token. If there is
+no separator, then the token will be left as it is.

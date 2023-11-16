@@ -49,7 +49,7 @@ void FreeStream(ResizableStream stream) {
 
 ResizableStream CopyStream(ResizableStream other)
 {
-	ResizableStream copy = CreateStream(other.capacity, other.element_size);
+	ResizableStream copy = CreateStream(other.size, other.element_size);
 	memcpy(copy.buffer, other.buffer, other.element_size * other.size);
 	copy.size = other.size;
 

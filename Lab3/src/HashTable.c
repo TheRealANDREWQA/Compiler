@@ -25,9 +25,16 @@ size_t GetExtendedCapacity(size_t capacity) {
 
 int HashTableCompareIntegers(const void* first, const void* second)
 {
-	unsigned int* first_int = first;
-	unsigned int* second_int = second;
+	const unsigned int* first_int = first;
+	const unsigned int* second_int = second;
 	return *first_int == *second_int;
+}
+
+int HashTableCompareSizeT(const void* first, const void* second)
+{
+	const size_t* first_sizet = first;
+	const size_t* second_sizet = second;
+	return *first_sizet == *second_sizet;
 }
 
 size_t HashTableMapPowerOfTwo(size_t index, size_t capacity)
@@ -38,6 +45,11 @@ size_t HashTableMapPowerOfTwo(size_t index, size_t capacity)
 size_t HashTableHashInteger(const void* identifier)
 {
 	return *(unsigned int*)identifier;
+}
+
+size_t HashTableHashSizeT(const void* identifier)
+{
+	return *(size_t*)identifier;
 }
 
 size_t HashTableGrowPowerOfTwo(size_t capacity)

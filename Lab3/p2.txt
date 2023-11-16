@@ -1,0 +1,12 @@
+string haystack = "Hey TherePoggers";
+string needle = "Pog";
+while (haystack[0] != "\0") {
+	int index = 0;	
+	while (needle[index] == haystack[index] && needle[index] != "\0") {
+		index++;
+	}
+	if (needle[index] == 0) {
+		return true;
+	}
+}
+return false;

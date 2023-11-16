@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\FiniteAutomata.h" />
     <ClInclude Include="src\HashTable.h" />
     <ClInclude Include="src\ParsingRules.h" />
     <ClInclude Include="src\ProgramInternalForm.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="src\SymbolTable.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\FiniteAutomata.c" />
     <ClCompile Include="src\HashTable.c" />
     <ClCompile Include="src\main.c" />
     <ClCompile Include="src\ParsingRules.c" />

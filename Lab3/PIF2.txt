@@ -1,0 +1,68 @@
+// PIF2.txt
+string | 7
+identifier | 0
+= | 13
+string constant | 1
+; | 7
+string | 7
+identifier | 2
+= | 13
+string constant | 3
+; | 7
+while | 3
+( | 4
+identifier | 0
+[ | 0
+int constant | 4
+] | 1
+!= | 2
+string constant | 5
+) | 5
+{ | 2
+int | 5
+identifier | 6
+= | 13
+int constant | 4
+; | 7
+while | 3
+( | 4
+identifier | 2
+[ | 0
+identifier | 6
+] | 1
+== | 1
+identifier | 0
+[ | 0
+identifier | 6
+] | 1
+&& | 5
+identifier | 2
+[ | 0
+identifier | 6
+] | 1
+!= | 2
+string constant | 5
+) | 5
+{ | 2
+identifier | 6
+++ | 7
+; | 7
+} | 3
+if | 2
+( | 4
+identifier | 2
+[ | 0
+identifier | 6
+] | 1
+== | 1
+int constant | 4
+) | 5
+{ | 2
+return | 13
+true | 11
+; | 7
+} | 3
+} | 3
+return | 13
+false | 12
+; | 7

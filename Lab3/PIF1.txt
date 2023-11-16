@@ -1,0 +1,43 @@
+// PIF1.txt
+int | 5
+identifier | 0
+= | 13
+int constant | 1
+; | 7
+int | 5
+identifier | 2
+= | 13
+int constant | 3
+; | 7
+while | 3
+( | 4
+identifier | 0
+> | 15
+int constant | 3
+) | 5
+{ | 2
+identifier | 2
+= | 13
+identifier | 2
+* | 18
+int constant | 4
++ | 16
+identifier | 0
+| 20
+int constant | 4
+; | 7
+} | 3
+if | 2
+( | 4
+identifier | 2
+== | 1
+identifier | 0
+) | 5
+{ | 2
+return | 13
+true | 11
+; | 7
+} | 3
+return | 13
+false | 12
+; | 7

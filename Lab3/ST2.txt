@@ -1,0 +1,8 @@
+// ST2.txt
+0 | 4
+haystack | 0
+"\0" | 5
+needle | 2
+index | 6
+"Pog" | 3
+"Hey TherePoggers" | 1

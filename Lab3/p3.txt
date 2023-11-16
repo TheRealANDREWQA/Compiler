@@ -1,0 +1,9 @@
+int array[10];
+int count = 10;
+int index = 0;
+int sum = 0;
+while (index < count) {
+	sum = sum + array[index];
+	index++;
+}
+return sum;

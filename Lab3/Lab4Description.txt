@@ -1,0 +1,9 @@
+format := alphabet_statement states_statement transition_statement initial_state_statement final_states_statement
+alphabet_statement := "alphabet = {" identifier "}"
+state_list := identifier | identifier ", " state_list
+states_statement := "states = {" state_list "}"
+transition := identifier "-" identifier "-" identifier
+transition_list := transition | transition ", " transition_list
+transition_statement := "transitions = {" transition_list "}"
+initial_statetement := "initial_state =" identifier
+final_states_statement := "final_states = {" state_list "}"
