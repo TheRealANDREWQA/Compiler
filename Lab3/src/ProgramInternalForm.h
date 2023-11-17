@@ -2,6 +2,7 @@
 #include "ResizableStream.h"
 #include <stdbool.h>
 #include "StringUtilities.h"
+#include "FiniteAutomata.h"
 
 typedef enum {
 	TOKEN_IDENTIFIER,
@@ -30,6 +31,9 @@ typedef struct {
 	ResizableStream separators;
 	// Element type is Token
 	ResizableStream token_order;
+
+	FiniteAutomata identifier_fa;
+	FiniteAutomata integer_constant_fa;
 } ProgramInternalForm;
 
 ProgramInternalForm CreatePIF();

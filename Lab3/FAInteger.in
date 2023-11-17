@@ -1,0 +1,5 @@
+alphabet = {-+0123456789}
+states = {q0, q1, q2, q3}
+transitions = { q0|-+|q1, q0|123456789|q2, q1|123456789|q2, q2|0123456789|q2, q0|0|q3 }
+initial_state = q0
+final_states = {q1, q2, q3}

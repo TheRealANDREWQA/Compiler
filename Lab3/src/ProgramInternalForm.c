@@ -3,6 +3,7 @@
 #include "ParsingRules.h"
 #include <stdio.h>
 #include <string.h>
+#include <cassert>
 
 ProgramInternalForm CreatePIF() {
 	ProgramInternalForm pif;
@@ -11,6 +12,14 @@ ProgramInternalForm CreatePIF() {
 	pif.operators = CreateStream(0, sizeof(string));
 	pif.separators = CreateStream(0, sizeof(string));
 	pif.token_order = CreateStream(0, sizeof(Token));
+
+	pif.integer_constant_fa = CreateFiniteAutomata();
+	pif.identifier_fa = CreateFiniteAutomata();
+
+	bool success = ReadFiniteAutomataFile("FAIdentifier.in", &pif.identifier_fa);
+	assert(success);
+	success = ReadFiniteAutomataFile("FAInteger.in", &pif.integer_constant_fa);
+	assert(success);
 
 	return pif;
 }

@@ -99,7 +99,7 @@ bool ReadFiniteAutomataFile(const char* path, FiniteAutomata* finite_automata) {
 		string* token = GetElement(transition_tokens, index);
 		*token = StringRemoveLeadingAndEndingChar(*token, ' ', ' ');
 		ResizableStream parsed_values = CreateStream(3, sizeof(string));
-		ParseTokensByCharacter(*token, '-', &parsed_values);
+		ParseTokensByCharacter(*token, '|', &parsed_values);
 		if (parsed_values.size != 3) {
 			FreeStream(parsed_values);
 			FreeStream(transition_tokens);
@@ -117,22 +117,28 @@ bool ReadFiniteAutomataFile(const char* path, FiniteAutomata* finite_automata) {
 
 		FATableEntry* entry = FindTablePtr(&finite_automata->transitions, &state_index);
 		string parsed_terminal = *(string*)GetElement(parsed_values, 1);
-		FATransition transition;
-		transition.terminal = parsed_terminal.characters[0];
-		transition.target_state_index = FindFAStateIndex(finite_automata, *(string*)GetElement(parsed_values, 2));
-
 		if (entry == NULL) {
 			FATableEntry new_entry;
-			new_entry.stream = CreateStream(4, sizeof(FATransition));
+			new_entry.stream = CreateStream(parsed_terminal.size, sizeof(FATransition));
 
-			Add(&new_entry.stream, &transition);
+			for (size_t terminal_index = 0; terminal_index < parsed_terminal.size; terminal_index++) {
+				FATransition transition;
+				transition.terminal = parsed_terminal.characters[terminal_index];
+				transition.target_state_index = FindFAStateIndex(finite_automata, *(string*)GetElement(parsed_values, 2));
+				Add(&new_entry.stream, &transition);
+			}
 			int should_resize = AddTable(&finite_automata->transitions, &new_entry, &state_index);
 			if (should_resize) {
 				GrowTable(&finite_automata->transitions, HashTableGrowPowerOfTwo);
 			}
 		}
 		else {
-			Add(&entry->stream, &transition);
+			for (size_t terminal_index = 0; terminal_index < parsed_terminal.size; terminal_index++) {
+				FATransition transition;
+				transition.terminal = parsed_terminal.characters[terminal_index];
+				transition.target_state_index = FindFAStateIndex(finite_automata, *(string*)GetElement(parsed_values, 2));
+				Add(&entry->stream, &transition);
+			}
 		}
 		FreeStream(parsed_values);
 	}

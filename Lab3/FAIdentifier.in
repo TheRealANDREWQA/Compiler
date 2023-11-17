@@ -1,0 +1,5 @@
+alphabet = {qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789}
+states = {q0, q1, q2}
+transitions = { q0|qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM|q1, q1|qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789|q2, q2|qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789|q1 }
+initial_state = q0
+final_states = {q1, q2}

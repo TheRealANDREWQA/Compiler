@@ -65,7 +65,8 @@ string ScanSourceFile(ProgramInternalForm* pif, SymbolTable* symbol_table, const
 						return StringMallocCopyFromPointer(temp_memory);
 					}
 
-					bool is_int_constant = IsIntConstant(*current_token);
+					bool is_int_constant = FiniteAutomataVerifySequence(&pif->integer_constant_fa, *current_token);
+					//bool is_int_constant = IsIntConstant(*current_token);
 					if (is_int_constant) {
 						token.token_class = TOKEN_INT_CONSTANT;
 						token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);
@@ -83,7 +84,8 @@ string ScanSourceFile(ProgramInternalForm* pif, SymbolTable* symbol_table, const
 								token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);
 							}
 							else {
-								bool is_valid_identifier = IsValidIdentifier(*current_token);
+								//bool is_valid_identifier = IsValidIdentifier(*current_token);
+								bool is_valid_identifier = FiniteAutomataVerifySequence(&pif->identifier_fa, *current_token);
 								if (is_valid_identifier) {
 									token.token_class = TOKEN_IDENTIFIER;
 									token.entry_index = AddOrGetSymbolTableEntry(symbol_table, *current_token);

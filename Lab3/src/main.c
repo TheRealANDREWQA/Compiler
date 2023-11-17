@@ -5,7 +5,7 @@
 #include "FiniteAutomata.h"
 
 int main() {
-	/*ProgramInternalForm pif = CreatePIF();
+	ProgramInternalForm pif = CreatePIF();
 	SymbolTable symbol_table = CreateSymbolTable(0);
 
 	ReadTokenFile(&pif, "token.in");
@@ -24,9 +24,9 @@ int main() {
 		if (!success) {
 			printf("Failed to write ST.out\n");
 		}
-	}*/
+	}
 
-	FiniteAutomata finite_automata = CreateFiniteAutomata();
+	/*FiniteAutomata finite_automata = CreateFiniteAutomata();
 	bool success = ReadFiniteAutomataFile("FA.in", &finite_automata);
 	if (!success) {
 		printf("Failed reading FA.in\n");
@@ -35,7 +35,7 @@ int main() {
 		printf("The file was successfully read\n");
 		FiniteAutomataConsole(&finite_automata);
 	}
-	DestroyFiniteAutomata(&finite_automata);
+	DestroyFiniteAutomata(&finite_automata);*/
 
 	return 0;
 }
